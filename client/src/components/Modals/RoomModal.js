@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client'
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { ADD_ROOM, UPDATE_ROOM } from '../../graphql/mutations/roomMutations'
 import { FormButton, Input, TextArea } from '../GlobalStyles/FormStyles'
 import { AddField, GridContainer, ModalBox, ModalContainer, ModalTitle, RoomSelectionBox } from '../GlobalStyles/ModalStyles'
@@ -10,7 +10,7 @@ import "./animation.css"
 import { GET_HOTEL } from '../../graphql/queries/hotelQueries'
 import ImageUpload from '../ImageUpload/ImageUpload'
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { bulkImageUpload, deleteImageBulk, imageUpload } from '../../utils/utilFunctions'
+import { bulkImageUpload, deleteImageBulk } from '../../utils/utilFunctions'
 import Loader from '../Loaders/Loader'
 
 const RoomModal = (props) => {

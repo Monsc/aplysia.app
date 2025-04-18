@@ -10,7 +10,6 @@ import SelectOccupancy from './SelectOccupancy';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SearchIcon from '@mui/icons-material/Search';
-import { fontSize } from '@mui/system';
 
 const Extras = styled.div`
     margin-top: 20px;
