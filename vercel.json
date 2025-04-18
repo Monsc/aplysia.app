@@ -1,9 +1,21 @@
 {
   "version": 2,
-  "buildCommand": "cd client && npm run build",
+  "buildCommand": "cd client && npm install && npm run build",
   "outputDirectory": "client/build",
   "framework": "create-react-app",
   "env": {
-    "NODE_ENV": "production"
+    "NODE_ENV": "production",
+    "REACT_APP_API_URL": "https://api.aplysia.app",
+    "REACT_APP_STRIPE_PUBLIC_KEY": "@stripe_public_key"
+  },
+  "regions": ["iad1"],
+  "github": {
+    "silent": true,
+    "autoJobCancelation": true
+  },
+  "build": {
+    "env": {
+      "NODE_ENV": "production"
+    }
   }
 } 
