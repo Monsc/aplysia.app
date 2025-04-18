@@ -19,7 +19,7 @@ jobs:
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
           working-directory: ./client
-          vercel-args: '--prod'
+          vercel-args: '--prod --name aplysia-app-client'
         env:
           NODE_ENV: production
           REACT_APP_API_URL: https://api.aplysia.app

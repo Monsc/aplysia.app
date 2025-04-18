@@ -1,5 +1,6 @@
 {
   "version": 2,
+  "name": "aplysia-app-client",
   "rootDirectory": "client",
   "installCommand": "npm install",
   "buildCommand": "npm run build",
