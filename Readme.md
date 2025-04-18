@@ -129,6 +129,33 @@ Contributions are what make the open source community such an amazing place to b
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
+# Albatroost
+
+**加入 Albatroost，共建数字游民友好型栖息地 🕊️**\
+**Join Albatroost and build a digital-nomad-friendly roost together 🕊️**
+
+**Albatroost** 是一个开源平台，旨在打造全球数字游民的线上落脚社区和线下栖息驿站。\
+**Albatroost** is an open-source platform designed to create an online community and offline roosts for digital nomads worldwide.
+
+无论你是代码贡献者、设计师，还是想分享优质行程和住宿经验的旅行家，都欢迎来到这里——\
+Whether you are a code contributor, designer, or a traveler looking to share quality itineraries and accommodation tips, you are welcome here—
+
+- ⭐ **Fork & Star |** 为项目点赞，助力更多人发现  /  Fork & star the repo to help others find us
+- 🛠️ **贡献代码 |** PR、Issue、优化文档，一起完善功能  /  Contribute code: open PRs, Issues, and improve documentation
+- 🎨 **设计 & 文案 |** 提交 Logo、UI 建议，或翻译多语言  /  Design & copy: submit logos, UI suggestions, or translations
+- 🌍 **分享资源 |** 推荐优质民宿、活动场所，让全球游民都住得安心  /  Share resources: recommend great hostels and venues to make nomads feel at home
+
+**立即动手，一起让 Albatroost 成为你的第二个“家”！**\
+**Get started now and make Albatroost your second home!**
+
+---
+
+我的青年旅社位于萨拉热窝，欢迎随时来访；\
+My hostel is located in Sarajevo—feel free to visit anytime;
+
+我本人没有任何开发经验，这些文档和功能都是借助 AI 完成的，期待与你一起成长！\
+I personally have no development experience; this project is built with the help of AI. Looking forward to growing together!
+
 
 <!-- CONTACT -->
 ## Contact
