@@ -1,6 +1,7 @@
 {
   "version": 2,
-  "name": "aplysia-app-client",
+  "name": "aplysia-app",
+  "framework": "create-react-app",
   "buildCommand": "npm install && npm run build",
   "outputDirectory": "build",
   "builds": [
@@ -8,14 +9,27 @@
       "src": "package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "build"
+        "distDir": "build",
+        "zeroConfig": true
       }
     }
   ],
   "routes": [
     {
+      "src": "/static/(.*)",
+      "dest": "/static/$1"
+    },
+    {
+      "src": "/favicon.ico",
+      "dest": "/favicon.ico"
+    },
+    {
+      "src": "/manifest.json",
+      "dest": "/manifest.json"
+    },
+    {
       "src": "/(.*)",
-      "dest": "build/$1"
+      "dest": "/index.html"
     }
   ],
   "env": {
