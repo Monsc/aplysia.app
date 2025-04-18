@@ -10,18 +10,38 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      
+      - name: 显示当前目录
+        run: pwd && ls -la
       
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '16'
-          
+      
+      - name: 验证 Vercel Token
+        run: |
+          if [ -z "${{ secrets.VERCEL_TOKEN }}" ]; then
+            echo "错误: VERCEL_TOKEN 未设置"
+            exit 1
+          else
+            echo "VERCEL_TOKEN 已设置"
+          fi
+      
       - name: Install Dependencies
-        run: npm install
-        
+        run: |
+          echo "开始安装依赖..."
+          npm install
+          echo "依赖安装完成"
+      
       - name: Build Project
-        run: npm run build
-        
+        run: |
+          echo "开始构建项目..."
+          npm run build
+          echo "项目构建完成"
+      
       - name: Deploy to Vercel
         uses: amondnet/vercel-action@v20
         with:
