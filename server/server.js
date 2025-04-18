@@ -18,40 +18,54 @@ app.use(isAuth)
 let cachedDb = null
 const connectToDatabase = async () => {
     if (cachedDb) {
+        console.log('Using cached database connection')
         return cachedDb
     }
-    const mongoURL = process.env.MONGODB_URI || 'mongodb://localhost:27017/aplysia_local_db'
-    const db = await mongoose.connect(mongoURL, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        bufferCommands: false,
-        serverSelectionTimeoutMS: 5000
-    })
-    cachedDb = db
-    return db
+    console.log('Connecting to MongoDB...')
+    console.log('MongoDB URI:', process.env.MONGODB_URI ? 'URI exists' : 'URI is missing')
+    
+    try {
+        const mongoURL = process.env.MONGODB_URI || 'mongodb://localhost:27017/aplysia_local_db'
+        const db = await mongoose.connect(mongoURL, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            bufferCommands: false,
+            serverSelectionTimeoutMS: 5000
+        })
+        console.log('MongoDB Connected Successfully')
+        cachedDb = db
+        return db
+    } catch (error) {
+        console.error('MongoDB Connection Error:', error.message)
+        throw error
+    }
 }
 
 // GraphQL 中间件
 app.use("/graphql", async (req, res, next) => {
     try {
+        console.log('Attempting to connect to database for GraphQL request')
         await connectToDatabase()
+        console.log('Database connected, creating GraphQL handler')
         return createHandler({
             schema,
             graphiql: process.env.NODE_ENV !== 'production'
         })(req, res)
     } catch (error) {
-        console.error('Database connection error:', error)
-        res.status(500).json({ error: 'Database connection failed' })
+        console.error('GraphQL Error:', error.message)
+        res.status(500).json({ error: 'Database connection failed', details: error.message })
     }
 })
 
 // 测试路由
 app.get('/', async (req, res) => {
     try {
+        console.log('Testing database connection...')
         await connectToDatabase()
-        res.send("aplysia.app API is running...")
+        res.send("aplysia.app API is running... Database connected!")
     } catch (error) {
-        res.status(500).send("Database connection error")
+        console.error('Health check failed:', error.message)
+        res.status(500).send(`Database connection error: ${error.message}`)
     }
 })
 
