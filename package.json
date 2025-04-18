@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "@types/styled-components": "^5.1.34"
+  },
+  "dependencies": {
+    "browser-image-compression": "^2.0.2"
+  }
+}
