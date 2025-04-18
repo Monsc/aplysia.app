@@ -66,7 +66,7 @@ const StripeCheckoutComponent: React.FC<Props> = ({
       <StripeCheckout
         token={handleToken}
         stripeKey={stripeKey}
-        name="JoyHostel"
+        name="aplysia.app"
         description={`支付预订 #${bookingId}`}
         amount={amount * 100}
         currency="CNY"

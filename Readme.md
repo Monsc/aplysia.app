@@ -40,9 +40,10 @@
 <img src="./demo/ss1.png" alt=""/>
 <br>
 
-Simple hotel booking app with content management system. Users can book rooms in different hotels for specific dates. Hotel managers can create, update, delete a hotel and its rooms. Admin can manage everything in the app.
+### Description
+Simple booking app (aplysia.app) with content management system. Users can book rooms in different hotels for specific dates. Hotel managers can create, update, delete a hotel and its rooms. Admin can manage everything.
 
-### Built With
+### Tech Stack
 * [React](https://reactjs.org/)
 * [Node JS](https://nodejs.org/en/)
 * [Express JS](https://expressjs.com/)

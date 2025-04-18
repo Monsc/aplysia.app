@@ -15,7 +15,7 @@ app.use(isAuth)
 dotenv.config()
 
 // MongoDB 连接
-const mongoURL = process.env.MONGODB_URI || 'mongodb://localhost:27017/joyhostel'
+const mongoURL = process.env.MONGODB_URI || 'mongodb://localhost:27017/aplysia_local_db'
 mongoose.connect(mongoURL, {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -34,4 +34,4 @@ const PORT = 5002;
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}...`))
 
 // 测试路由
-app.get('/', (req, res) => res.send("JoyHostel API is running..."))
+app.get('/', (req, res) => res.send("aplysia.app API is running..."))
