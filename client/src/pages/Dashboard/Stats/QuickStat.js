@@ -5,7 +5,7 @@ import Loader from '../../../components/Loaders/Loader';
 import { useQuery } from '@apollo/client';
 import { GET_HOTEL_BOOKINGS } from '../../../graphql/queries/bookingQueries';
 import { Text } from '../../../components/GlobalStyles/TableStyles';
-import { Chart } from 'react-charts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 const CardContainer = styled.div`
     background: white;
@@ -63,6 +63,7 @@ const QuickStat = (props) => {
             const month = new Date(booking.from).getMonth();
             if (!monthlyData[month]) {
                 monthlyData[month] = {
+                    month: month + 1,
                     earnings: 0,
                     bookings: 0,
                     occupancyRate: 0
@@ -83,7 +84,7 @@ const QuickStat = (props) => {
             monthlyData[month].occupancyRate = (bookedDays / totalRoomDays) * 100;
         });
 
-        return monthlyData;
+        return Object.values(monthlyData);
     }, [data, hotel.totalRooms]);
 
     if (loading) return <Loader />
@@ -119,23 +120,6 @@ const QuickStat = (props) => {
         return Math.round((occupiedRooms / totalRooms) * 100);
     }
 
-    const chartData = [
-        {
-            label: '月收入',
-            data: Object.entries(getMonthlyStats).map(([month, data]) => ({
-                x: new Date(2024, month, 1),
-                y: data.earnings
-            }))
-        },
-        {
-            label: '入住率',
-            data: Object.entries(getMonthlyStats).map(([month, data]) => ({
-                x: new Date(2024, month, 1),
-                y: data.occupancyRate
-            }))
-        }
-    ]
-
     return (
         <CardContainer>
             <Grid>
@@ -166,23 +150,18 @@ const QuickStat = (props) => {
             </Grid>
 
             <ChartContainer>
-                <Chart
-                    options={{
-                        data: chartData,
-                        primaryAxis: { 
-                            type: 'time',
-                            position: 'bottom',
-                            tickFormat: (value) => value.toLocaleDateString('zh-CN', { month: 'short' })
-                        },
-                        secondaryAxes: [
-                            { 
-                                type: 'linear',
-                                position: 'left',
-                                stacked: false
-                            }
-                        ],
-                    }}
-                />
+                <ResponsiveContainer width="100%" height="100%">
+                    <LineChart data={getMonthlyStats}>
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="month" />
+                        <YAxis />
+                        <Tooltip />
+                        <Legend />
+                        <Line type="monotone" dataKey="earnings" stroke="#8884d8" />
+                        <Line type="monotone" dataKey="bookings" stroke="#82ca9d" />
+                        <Line type="monotone" dataKey="occupancyRate" stroke="#ffc658" />
+                    </LineChart>
+                </ResponsiveContainer>
             </ChartContainer>
         </CardContainer>
     )
