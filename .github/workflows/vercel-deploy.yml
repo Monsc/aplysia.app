@@ -6,7 +6,7 @@ on:
     branches: [ initial-setup ]
 
 jobs:
-  Deploy:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -29,7 +29,6 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           vercel-args: '--prod'
         env:
-          VERCEL_TOKEN: L1ZI9yyJLKc51UgF9rN1jZRG
           NODE_ENV: production
           REACT_APP_API_URL: https://api.aplysia.app
           REACT_APP_WS_URL: wss://api.aplysia.app/graphql 
