@@ -1,4 +1,14 @@
 {
+  "name": "joyhostel",
+  "version": "1.0.0",
+  "description": "JoyHostel Booking System",
+  "scripts": {
+    "start": "cd server && node server.js",
+    "install": "cd server && npm install"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "devDependencies": {
     "@types/styled-components": "^5.1.34"
   },
