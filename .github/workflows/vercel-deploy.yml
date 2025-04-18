@@ -18,6 +18,8 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '16'
+          cache: 'npm'
+          cache-dependency-path: 'client/package-lock.json'
 
       - name: Verify Vercel Token
         run: |
@@ -27,10 +29,17 @@ jobs:
           fi
           echo "✅ Vercel token verified"
 
+      - name: Create env file
+        run: |
+          cd client
+          echo "REACT_APP_API_URL=${{ secrets.REACT_APP_API_URL }}" > .env
+          echo "GENERATE_SOURCEMAP=false" >> .env
+          echo "✅ Environment file created"
+
       - name: Install Dependencies
         working-directory: ./client
         run: |
-          npm install
+          npm ci
           echo "✅ Dependencies installed successfully"
 
       - name: Build Project
