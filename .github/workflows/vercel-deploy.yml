@@ -19,6 +19,11 @@ jobs:
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
           working-directory: ./client
+          vercel-args: '--prod'
+        env:
+          NODE_ENV: production
+          REACT_APP_API_URL: https://api.aplysia.app
+          REACT_APP_WS_URL: wss://api.aplysia.app/graphql
           
       - name: Setup Node.js
         uses: actions/setup-node@v2
