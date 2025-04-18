@@ -69,6 +69,10 @@ const MainMenu = () => {
             path: '/'
         },
         {
+            name: 'Explore',
+            path: '/explore'
+        },
+        {
             name: 'Bookings',
             path: '/bookings'
         },
