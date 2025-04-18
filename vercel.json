@@ -1,13 +1,9 @@
 {
   "version": 2,
   "name": "aplysia-app-client",
-  "rootDirectory": "client",
-  "installCommand": "npm install",
-  "buildCommand": "npm run build",
-  "outputDirectory": "build",
   "builds": [
     {
-      "src": "package.json",
+      "src": "client/package.json",
       "use": "@vercel/static-build",
       "config": {
         "distDir": "build"
@@ -17,7 +13,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "build/$1"
+      "dest": "client/build/$1"
     }
   ],
   "env": {
