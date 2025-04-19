@@ -1,56 +1,45 @@
 name: Deploy to Vercel
+
 on:
   push:
-    branches: [ initial-setup, main ]
-  pull_request:
-    branches: [ initial-setup, main ]
-
-permissions:
-  contents: write
-  pull-requests: write
-  deployments: write
-  actions: write
+    branches:
+      - main
+    paths:
+      - 'src/**'
+      - 'public/**'
+      - 'package.json'
+      - '.github/workflows/vercel-deploy.yml'
 
 jobs:
-  Deploy-Production:
+  deploy:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
+    environment: production
 
-      - name: Print working directory
-        run: |
-          echo "Current directory:"
-          pwd
-          echo "Directory contents:"
-          ls -la
+    steps:
+      - uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '16'
+          node-version: '18'
           cache: 'npm'
+          cache-dependency-path: 'package-lock.json'
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: |
-          echo "Installing dependencies..."
-          npm install
-          echo "Dependencies installed successfully"
+          npm ci
+          echo "✅ Dependencies installed successfully"
 
-      - name: Build project
+      - name: Build Project
         run: |
-          echo "Building project..."
           npm run build
-          echo "Build completed successfully"
+          echo "✅ Project built successfully"
 
       - name: Deploy to Vercel
         uses: amondnet/vercel-action@v20
         with:
+          zeit-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          working-directory: ./
           vercel-args: '--prod' 

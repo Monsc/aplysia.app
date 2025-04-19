@@ -8,4 +8,4 @@ export const userRoute = JSON.parse(localStorage.getItem('user')) &&
 export const adminRoute = JSON.parse(localStorage.getItem('user')) && 
   JSON.parse(localStorage.getItem('user')).isAdmin
 
-export const noUserRoute = !JSON.parse(localStorage.getItem('user'))
+export const guestRoute = !JSON.parse(localStorage.getItem('user'))

@@ -1,26 +1,41 @@
 {
   "version": 2,
-  "name": "aplysia-app-client",
-  "buildCommand": "npm install && npm run build",
-  "outputDirectory": "build",
   "builds": [
     {
       "src": "package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "build"
+        "buildCommand": "npm run build",
+        "outputDirectory": "build"
       }
     }
   ],
   "routes": [
     {
+      "src": "/static/(.*)",
+      "dest": "/static/$1"
+    },
+    {
+      "src": "/assets/(.*)",
+      "dest": "/assets/$1"
+    },
+    {
+      "src": "/favicon.ico",
+      "dest": "/favicon.ico"
+    },
+    {
+      "src": "/manifest.json",
+      "dest": "/manifest.json"
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
       "src": "/(.*)",
-      "dest": "build/$1"
+      "dest": "/index.html"
     }
   ],
   "env": {
-    "NODE_ENV": "production",
-    "REACT_APP_API_URL": "https://api.aplysia.app",
-    "REACT_APP_WS_URL": "wss://api.aplysia.app/graphql"
+    "NODE_OPTIONS": "--openssl-legacy-provider"
   }
 } 
