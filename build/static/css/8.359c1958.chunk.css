@@ -1,0 +1,1 @@
+.modal-box{animation:slide .8s}@keyframes slide{0%{opacity:0;transform:translateY(-200px)}to{opacity:1;transform:translateY(0)}}
