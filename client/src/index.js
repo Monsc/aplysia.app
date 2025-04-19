@@ -1,24 +1,16 @@
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import './index.css';
 import App from './App';
-
-const user = JSON.parse(localStorage.getItem('user'))
-
-const client = new ApolloClient({
-  uri: process.env.REACT_APP_API_URL || "http://localhost:5002/graphql",
-  cache: new InMemoryCache(),
-  headers: {
-    authorization: user ? `Bearer ${user.accessToken}` : ' ',
-  }
-});
+import { ApolloProvider } from '@apollo/client';
+import client from './apollo/client';
 
 ReactDOM.render(
-  <ApolloProvider client={client}>
-    <React.StrictMode>
+  <React.StrictMode>
+    <ApolloProvider client={client}>
       <App />
-    </React.StrictMode>
-  </ApolloProvider>,
+    </ApolloProvider>
+  </React.StrictMode>,
   document.getElementById('root')
 );
 
