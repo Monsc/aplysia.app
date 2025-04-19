@@ -13,7 +13,7 @@ import Header from "./components/Header/Header";
 import MainMenu from "./components/MainMenu/MainMenu";
 import { GlobalContext } from "./utils/Context";
 
-import { managerRoute, userRoute } from "./utils/ConditionalRoutes";
+import { managerRoute, userRoute, guestRoute } from "./utils/ConditionalRoutes";
 import { ToastContainer } from "react-toastify";
 import { GET_USER } from "./graphql/queries/userQueries";
 import { GENERATE_TOKEN } from "./graphql/mutations/userMutations";
@@ -84,56 +84,36 @@ function App() {
                   exact
                   path="/dashboard"
                   element={
-                    managerRoute ? <Dashboard /> : <Navigate to="/login" />
+                    managerRoute ? (
+                      <Dashboard />
+                    ) : (
+                      <Navigate to="/login" />
+                    )
                   }
                 ></Route>
 
                 <Route
                   exact
                   path="/"
-                  element={
-                    managerRoute || userRoute ? (
-                      <Home />
-                    ) : (
-                      <Navigate to="/login" />
-                    )
-                  }
+                  element={<Home />}
                 ></Route>
 
                 <Route path="/explore">
                   <Route
                     path=":location/:checkIn/:checkOut/:people"
-                    element={
-                      managerRoute || userRoute ? (
-                        <Explore />
-                      ) : (
-                        <Navigate to="/login" />
-                      )
-                    }
+                    element={<Explore />}
                   />
 
                   <Route
                     path=""
-                    element={
-                      managerRoute || userRoute ? (
-                        <Explore />
-                      ) : (
-                        <Navigate to="/login" />
-                      )
-                    }
+                    element={<Explore />}
                   />
                 </Route>
 
                 <Route
                   exact
                   path="/hotel/:id"
-                  element={
-                    managerRoute || userRoute ? (
-                      <Hotel />
-                    ) : (
-                      <Navigate to="/login" />
-                    )
-                  }
+                  element={<Hotel />}
                 ></Route>
 
                 <Route
