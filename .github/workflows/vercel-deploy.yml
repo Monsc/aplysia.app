@@ -5,7 +5,9 @@ on:
     branches:
       - main
     paths:
-      - 'client/**'
+      - 'src/**'
+      - 'public/**'
+      - 'package.json'
       - '.github/workflows/vercel-deploy.yml'
 
 jobs:
@@ -21,7 +23,7 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
-          cache-dependency-path: 'client/package-lock.json'
+          cache-dependency-path: 'package-lock.json'
 
       - name: Verify Vercel Token
         if: env.VERCEL_TOKEN == ''
@@ -33,13 +35,11 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          cd client
           npm ci
           echo "✅ Dependencies installed successfully"
 
       - name: Build Project
         run: |
-          cd client
           npm run build
           echo "✅ Project built successfully"
 
@@ -49,5 +49,4 @@ jobs:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          working-directory: ./client
           vercel-args: '--prod' 
