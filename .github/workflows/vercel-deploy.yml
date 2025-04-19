@@ -4,49 +4,44 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
+    paths:
+      - 'client/**'
+      - '.github/workflows/vercel-deploy.yml'
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: production
+
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
-          node-version: '16'
+          node-version: '18'
           cache: 'npm'
           cache-dependency-path: 'client/package-lock.json'
 
       - name: Verify Vercel Token
+        if: env.VERCEL_TOKEN == ''
         run: |
-          if [ -z "${{ secrets.VERCEL_TOKEN }}" ]; then
-            echo "Error: VERCEL_TOKEN is not set in repository secrets"
-            exit 1
-          fi
-          echo "✅ Vercel token verified"
-
-      - name: Create env file
-        run: |
-          cd client
-          echo "REACT_APP_API_URL=${{ secrets.REACT_APP_API_URL }}" > .env
-          echo "GENERATE_SOURCEMAP=false" >> .env
-          echo "✅ Environment file created"
+          echo "Error: VERCEL_TOKEN is not set"
+          exit 1
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
 
       - name: Install Dependencies
-        working-directory: ./client
         run: |
+          cd client
           npm ci
           echo "✅ Dependencies installed successfully"
 
       - name: Build Project
-        working-directory: ./client
         run: |
+          cd client
           npm run build
-          echo "✅ Build completed successfully"
+          echo "✅ Project built successfully"
 
       - name: Deploy to Vercel
         uses: amondnet/vercel-action@v20
