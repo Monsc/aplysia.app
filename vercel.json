@@ -7,7 +7,7 @@
       "use": "@vercel/static-build",
       "config": {
         "distDir": "build",
-        "buildCommand": "npm ci && npm run build",
+        "buildCommand": "GENERATE_SOURCEMAP=false npm run build",
         "outputDirectory": "build"
       }
     }
